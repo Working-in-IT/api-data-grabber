@@ -386,7 +386,7 @@
       scrollY: "400px",
       scrollCollapse: true,
       order: [],
-      dom: '<"dt-toolbar"fB>rtip<"dt-bottom"l>',
+      dom: '<"dt-toolbar"fB>rt<"dt-bottom"lip>',
       buttons: [
         {
           extend: "excelHtml5",

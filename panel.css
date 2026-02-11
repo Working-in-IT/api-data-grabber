@@ -353,9 +353,17 @@ body {
   border-color: #1557b0;
 }
 
-/* DataTables controls — bottom: pagination + entries dropdown */
+/* DataTables controls — bottom: per-page left, info center, pagination right */
 .dt-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-top: 6px;
+  padding: 4px 0;
+}
+
+.dt-bottom .dataTables_length {
+  flex-shrink: 0;
 }
 
 .dt-bottom .dataTables_length select {
@@ -373,14 +381,14 @@ body {
   border-color: #1a73e8;
 }
 
-.dataTables_wrapper .dataTables_info {
-  padding: 6px 0;
+.dt-bottom .dataTables_info {
   color: #888;
-  display: inline;
+  padding: 0 12px;
+  white-space: nowrap;
 }
 
-.dataTables_wrapper .dataTables_paginate {
-  padding: 6px 0;
+.dt-bottom .dataTables_paginate {
+  flex-shrink: 0;
 }
 
 .dataTables_wrapper .dataTables_paginate .paginate_button {

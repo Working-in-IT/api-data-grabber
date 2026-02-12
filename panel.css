@@ -59,6 +59,26 @@ body {
   white-space: nowrap;
 }
 
+#toolbar-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+#toolbar-links a {
+  color: #888;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+#toolbar-links a:hover {
+  color: #333;
+}
+
 /* Split container */
 #split-container {
   display: flex;
@@ -468,6 +488,14 @@ body {
   #search-url {
     background: #3c3c3c;
     border-color: #555;
+    color: #d4d4d4;
+  }
+
+  #toolbar-links a {
+    color: #888;
+  }
+
+  #toolbar-links a:hover {
     color: #d4d4d4;
   }
 

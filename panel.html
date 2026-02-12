@@ -1,35 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html data-bs-theme="light">
 <head>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="lib/datatables.min.css">
-  <link rel="stylesheet" href="lib/buttons.dataTables.min.css">
+  <link rel="stylesheet" href="lib/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/dataTables.bootstrap5.min.css">
+  <link rel="stylesheet" href="lib/buttons.bootstrap5.min.css">
   <link rel="stylesheet" href="panel.css">
 </head>
 <body>
-  <div id="toolbar">
-    <button id="btn-clear" title="Clear all requests">Clear</button>
-    <select id="filter-type">
-      <option value="all">All</option>
-      <option value="xhr" selected>XHR</option>
-      <option value="fetch">Fetch</option>
-    </select>
-    <input type="text" id="search-url" placeholder="Filter by URL...">
-    <span id="request-count">0 requests</span>
-    <div id="toolbar-links">
-      <a href="https://github.com/Working-in-IT/api-data-grabber" target="_blank" title="GitHub">
-        <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
-      </a>
-      <a href="https://t.me/workinginit" target="_blank" title="Telegram">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0h-.056zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-      </a>
+  <nav id="toolbar" class="navbar navbar-expand py-1 px-2 border-bottom bg-body-tertiary">
+    <div class="d-flex align-items-center gap-2 w-100">
+      <button id="btn-clear" class="btn btn-outline-secondary btn-sm" title="Clear all requests">Clear</button>
+      <select id="filter-type" class="form-select form-select-sm" style="width: auto;">
+        <option value="all">All</option>
+        <option value="xhr" selected>XHR</option>
+        <option value="fetch">Fetch</option>
+      </select>
+      <input type="text" id="search-url" class="form-control form-control-sm" placeholder="Filter by URL..." style="max-width: 300px;">
+      <span id="request-count" class="text-muted small text-nowrap">0 requests</span>
+      <div id="toolbar-links" class="d-flex align-items-center gap-2 ms-auto">
+        <a href="https://github.com/Working-in-IT/api-data-grabber" target="_blank" class="text-muted" title="GitHub">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        </a>
+        <a href="https://t.me/workinginit" target="_blank" class="text-muted" title="Telegram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0012 0h-.056zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 01.171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+        </a>
+      </div>
     </div>
-  </div>
+  </nav>
 
   <div id="split-container">
     <div id="request-list-pane">
-      <table id="request-list">
-        <thead>
+      <table id="request-list" class="table table-sm table-hover mb-0">
+        <thead class="table-light sticky-top">
           <tr>
             <th>Method</th>
             <th>URL</th>
@@ -44,11 +47,17 @@
     <div id="divider"></div>
 
     <div id="response-pane">
-      <div id="response-tabs">
-        <button class="tab active" data-tab="json">Response</button>
-        <button class="tab" data-tab="headers">Headers</button>
-        <button class="tab" data-tab="table">Table</button>
-      </div>
+      <ul id="response-tabs" class="nav nav-tabs px-2 pt-1">
+        <li class="nav-item">
+          <button class="nav-link active py-1 px-3" data-tab="json">Response</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link py-1 px-3" data-tab="headers">Headers</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link py-1 px-3" data-tab="table">Table</button>
+        </li>
+      </ul>
 
       <div id="tab-json" class="tab-content active">
         <pre id="json-viewer"></pre>
@@ -68,9 +77,12 @@
   </div>
 
   <script src="lib/jquery.min.js"></script>
+  <script src="lib/bootstrap.bundle.min.js"></script>
   <script src="lib/jszip.min.js"></script>
   <script src="lib/datatables.min.js"></script>
+  <script src="lib/dataTables.bootstrap5.min.js"></script>
   <script src="lib/dataTables.buttons.min.js"></script>
+  <script src="lib/buttons.bootstrap5.min.js"></script>
   <script src="lib/buttons.html5.min.js"></script>
   <script src="panel.js"></script>
 </body>

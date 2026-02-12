@@ -19,9 +19,17 @@
   const arraySelector = document.getElementById("array-selector");
   const tableContainer = document.getElementById("table-container");
   const emptyState = document.getElementById("empty-state");
-  const tabs = document.querySelectorAll(".tab");
+  const tabs = document.querySelectorAll(".nav-link");
   const tabContents = document.querySelectorAll(".tab-content");
-  const tableTab = document.querySelector('.tab[data-tab="table"]');
+  const tableTab = document.querySelector('.nav-link[data-tab="table"]');
+
+  // ── Dark theme detection ────────────────────────────────────────
+  function applyTheme() {
+    var theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    document.documentElement.setAttribute("data-bs-theme", theme);
+  }
+  applyTheme();
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", applyTheme);
 
   // ── Network capture ──────────────────────────────────────────────
 
@@ -376,7 +384,7 @@
     });
 
     tableContainer.innerHTML =
-      '<table id="response-table" class="display compact" style="width:100%"></table>';
+      '<table id="response-table" class="table table-sm table-striped table-hover" style="width:100%"></table>';
 
     $("#response-table").DataTable({
       data: arrayData,

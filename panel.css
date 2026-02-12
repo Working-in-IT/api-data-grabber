@@ -200,21 +200,36 @@ body {
   font-size: 11px;
 }
 
-/* DataTables controls — top toolbar: search left, buttons right */
+/* DataTables controls — top toolbar */
 .dt-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 8px;
+  gap: 8px;
 }
 
-.dt-toolbar .dataTables_filter {
+.dt-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+}
+
+.dt-toolbar-left .dataTables_filter {
   margin: 0;
 }
 
-.dt-toolbar .dt-buttons {
-  margin: 0;
+.dt-toolbar-left .dt-filter-panes-btn {
   flex-shrink: 0;
+}
+
+.dt-toolbar-right {
+  flex-shrink: 0;
+}
+
+.dt-toolbar-right .dt-buttons {
+  margin: 0;
 }
 
 /* DataTables controls — bottom: per-page left, info center, pagination right */
@@ -259,6 +274,29 @@ body {
 /* SearchPanes — hidden by default, toggled via button */
 .dt-searchpanes-container {
   display: none;
+}
+
+.dt-searchpanes-container div.dtsp-panesContainer {
+  margin-bottom: 8px;
+  border: 1px solid var(--bs-border-color);
+  border-radius: var(--bs-border-radius);
+  padding: 8px;
+  background: var(--bs-body-bg);
+}
+
+.dt-searchpanes-container div.dtsp-searchPane div.dt-container,
+.dt-searchpanes-container div.dtsp-searchPane div.dataTables_wrapper {
+  border-color: var(--bs-border-color) !important;
+}
+
+.dt-searchpanes-container div.dtsp-topRow {
+  font-size: 11px;
+}
+
+.dt-searchpanes-container button.dtsp-clearAll,
+.dt-searchpanes-container button.dtsp-collapseAll,
+.dt-searchpanes-container button.dtsp-showAll {
+  font-size: 11px;
 }
 
 /* Dark theme overrides */

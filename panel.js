@@ -359,7 +359,7 @@
       scrollCollapse: true,
       order: [],
       columnControl: true,
-      dom: '<"dt-toolbar"fB><"dt-searchpanes-container">rt<"dt-bottom"lip>',
+      dom: '<"dt-toolbar"<"dt-toolbar-left"f<"dt-filter-panes-btn">><"dt-toolbar-right"B>><"dt-searchpanes-container">rt<"dt-bottom"lip>',
       buttons: [
         {
           extend: "excelHtml5",
@@ -374,16 +374,6 @@
           text: "Export to CSV",
           title: null,
         },
-        {
-          text: "Search Panes",
-          action: function () {
-            var $container = $(".dt-searchpanes-container");
-            if ($container.children().length === 0) {
-              dt.searchPanes.container().appendTo($container);
-            }
-            $container.slideToggle(200);
-          },
-        },
       ],
       searchPanes: {
         initCollapsed: true,
@@ -393,6 +383,23 @@
         info: "Showing _START_ to _END_ of _TOTAL_ entries",
       },
     });
+
+    // Filter Panes toggle button — placed right of search field
+    var filterBtn = document.createElement("button");
+    filterBtn.className = "btn btn-outline-secondary btn-sm";
+    filterBtn.textContent = "Filter Panes";
+    filterBtn.addEventListener("click", function () {
+      var $container = $(".dt-searchpanes-container");
+      if ($container.children().length === 0) {
+        dt.searchPanes.container().appendTo($container);
+      }
+      $container.slideToggle(200);
+      filterBtn.classList.toggle("active");
+    });
+    var filterBtnSlot = tableContainer.querySelector(".dt-filter-panes-btn");
+    if (filterBtnSlot) {
+      filterBtnSlot.appendChild(filterBtn);
+    }
   }
 
   function clearTable() {

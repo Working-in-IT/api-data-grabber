@@ -384,21 +384,25 @@
       },
     });
 
-    // Filter Panes toggle button — placed right of search field
-    var filterBtn = document.createElement("button");
-    filterBtn.className = "btn btn-outline-secondary btn-sm";
-    filterBtn.textContent = "Filter Panes";
-    filterBtn.addEventListener("click", function () {
-      var $container = $(".dt-searchpanes-container");
-      if ($container.children().length === 0) {
-        dt.searchPanes.container().appendTo($container);
+    // Filter Panes toggle button — only show if SearchPanes has panes
+    var spContainer = dt.searchPanes.container();
+    var hasPanes = $(spContainer).find(".dtsp-searchPane").length > 0;
+    if (hasPanes) {
+      var filterBtn = document.createElement("button");
+      filterBtn.className = "btn btn-outline-secondary btn-sm";
+      filterBtn.textContent = "Filter Panes";
+      filterBtn.addEventListener("click", function () {
+        var $slot = $(".dt-searchpanes-container");
+        if ($slot.children().length === 0) {
+          $(spContainer).appendTo($slot);
+        }
+        $slot.slideToggle(200);
+        filterBtn.classList.toggle("active");
+      });
+      var filterBtnSlot = tableContainer.querySelector(".dt-filter-panes-btn");
+      if (filterBtnSlot) {
+        filterBtnSlot.appendChild(filterBtn);
       }
-      $container.slideToggle(200);
-      filterBtn.classList.toggle("active");
-    });
-    var filterBtnSlot = tableContainer.querySelector(".dt-filter-panes-btn");
-    if (filterBtnSlot) {
-      filterBtnSlot.appendChild(filterBtn);
     }
   }
 

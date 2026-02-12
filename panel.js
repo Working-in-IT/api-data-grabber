@@ -190,7 +190,14 @@
     }
 
     if (parsed !== null) {
-      jsonViewer.innerHTML += renderJson(parsed);
+      var viewer = document.createElement("andypf-json-viewer");
+      viewer.data = parsed;
+      viewer.expanded = 2;
+      viewer.showToolbar = true;
+      viewer.showCopy = true;
+      viewer.showSize = true;
+      viewer.theme = document.documentElement.getAttribute("data-bs-theme") === "dark" ? "monokai" : "default-light";
+      jsonViewer.appendChild(viewer);
       currentArrays = detectArrays(parsed);
       updateTableTab();
     } else {
@@ -227,49 +234,6 @@
     html += "</div>";
 
     headersViewer.innerHTML = html;
-  }
-
-  // ── JSON rendering ───────────────────────────────────────────────
-
-  function renderJson(data, indent) {
-    if (indent === undefined) indent = 0;
-    var pad = "  ".repeat(indent);
-    var padInner = "  ".repeat(indent + 1);
-
-    if (data === null) {
-      return '<span class="json-null">null</span>';
-    }
-    if (typeof data === "boolean") {
-      return '<span class="json-boolean">' + data + "</span>";
-    }
-    if (typeof data === "number") {
-      return '<span class="json-number">' + data + "</span>";
-    }
-    if (typeof data === "string") {
-      return '<span class="json-string">"' + escapeHtml(data) + '"</span>';
-    }
-    if (Array.isArray(data)) {
-      if (data.length === 0) return "[]";
-      var items = [];
-      for (var i = 0; i < data.length; i++) {
-        items.push(padInner + renderJson(data[i], indent + 1));
-      }
-      return "[\n" + items.join(",\n") + "\n" + pad + "]";
-    }
-    if (typeof data === "object") {
-      var keys = Object.keys(data);
-      if (keys.length === 0) return "{}";
-      var entries = [];
-      for (var k = 0; k < keys.length; k++) {
-        entries.push(
-          padInner +
-          '<span class="json-key">"' + escapeHtml(keys[k]) + '"</span>: ' +
-          renderJson(data[keys[k]], indent + 1)
-        );
-      }
-      return "{\n" + entries.join(",\n") + "\n" + pad + "}";
-    }
-    return String(data);
   }
 
   // ── Array detection ──────────────────────────────────────────────
@@ -386,7 +350,7 @@
     tableContainer.innerHTML =
       '<table id="response-table" class="table table-sm table-striped table-hover" style="width:100%"></table>';
 
-    $("#response-table").DataTable({
+    var dt = $("#response-table").DataTable({
       data: arrayData,
       columns: columns,
       pageLength: 25,
@@ -394,7 +358,8 @@
       scrollY: "400px",
       scrollCollapse: true,
       order: [],
-      dom: '<"dt-toolbar"fB>rt<"dt-bottom"lip>',
+      columnControl: true,
+      dom: '<"dt-toolbar"fB><"dt-searchpanes-container">rt<"dt-bottom"lip>',
       buttons: [
         {
           extend: "excelHtml5",
@@ -409,7 +374,20 @@
           text: "Export to CSV",
           title: null,
         },
+        {
+          text: "Search Panes",
+          action: function () {
+            var $container = $(".dt-searchpanes-container");
+            if ($container.children().length === 0) {
+              dt.searchPanes.container().appendTo($container);
+            }
+            $container.slideToggle(200);
+          },
+        },
       ],
+      searchPanes: {
+        initCollapsed: true,
+      },
       language: {
         emptyTable: "No data in array",
         info: "Showing _START_ to _END_ of _TOTAL_ entries",
